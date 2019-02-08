@@ -1,52 +1,98 @@
 [
 	{
+		"id": 1,
 		"title": "Edgebounce Shoes",
     "price": 100,
     "salePrice": 50,
 		"reviewStars": 4.3,
-		"reviewsTotal": 101,
-		"productPicture": "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/12361d09745d4065b96ca886012203b8_9366/Edgebounce_Shoes_Pink_AC7104_01_standard.jpg",
+		"reviewsTotal": 104,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/001/Edgebounce_Shoes_White_AC8116_01_standard.jpg",
 		"tags": ["women", "running"], 
-		"kind": "Performance"
+		"kind": "Performance",
+		"specialTag": "Sale"
 	},
 	{
+		"id": 2,
+		"title": "Edgebounce Shoes",
+    "price": 100,
+    "salePrice": 50,
+		"reviewStars": 4.3,
+		"reviewsTotal": 104,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/002/Edgebounce_Shoes_Pink_AC7104_01_standard.jpg",
+		"tags": ["women", "running"], 
+		"kind": "Performance",
+		"specialTag": "Sale"
+	},
+	{
+		"id": 3,
+		"title": "Edgebounce Shoes",
+    "price": 100,
+    "salePrice": 70,
+		"reviewStars": 4.3,
+		"reviewsTotal": 104,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/003/Edgebounce_Shoes_Black_BB7566_01_standard.jpg",
+		"tags": ["women", "running"], 
+		"kind": "Performance",
+		"specialTag": "Sale"
+	},
+	{
+		"id": 4,
 		"title": "Cloudfoam Pure Shoes",
     "price": 70,
     "salePrice": null,
 		"reviewStars": 4.7,
-		"reviewsTotal": 428,
-		"productPicture": "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/bb0c6918d4e2457e9826a82e0131af8f_9366/Cloudfoam_Pure_Shoes_White_DB0695_01_standard.jpg",
+		"reviewsTotal": 434,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/004/Cloudfoam_Pure_Shoes_White_DB0695_01_standard.jpg",
 		"tags": ["women", "essentials"], 
-		"kind": "Essentials"
+		"kind": "Essentials",
+		"specialTag": null
 	},
 	{
-		"title": "Lite Racer Reborn Shoes",
+		"id": 5,
+		"title": "Cloudfoam Pure Shoes",
     "price": 70,
     "salePrice": null,
-		"reviewStars": 4,
-		"reviewsTotal": 1,
-		"productPicture": "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/e06ae7c7b4d14a16acb3a999005a8b6a_9366/Lite_Racer_Reborn_Shoes_White_F36653_01_standard.jpg",
+		"reviewStars": 4.7,
+		"reviewsTotal": 434,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/005/Cloudfoam_Pure_Shoes_Blue_B43628_01_standard.jpg",
 		"tags": ["women", "essentials"], 
-		"kind": "Essentials"
+		"kind": "Essentials",
+		"specialTag": null
 	},
 	{
-		"title": "NMD_R1 Shoes",
-    "price": 130,
-    "salePrice": null,
-		"reviewStars": 4.1,
-		"reviewsTotal": 6,
-		"productPicture": "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/bc4f2404e30d4eaca8e2a9a60103d8e3_9366/NMD_R1_Shoes_Green_BD8011_01_standard.jpg",
-		"tags": ["women", "originals", "Exclusive"], 
-		"kind": "Originals"
-	},
-	{
-		"title": "Predator Tango 19.3 Indoor Shoes",
+		"id": 58,
+		"title": "Continental 80 Shoes",
     "price": 80,
     "salePrice": null,
+		"reviewStars": 4,
+		"reviewsTotal": 65,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/058/Continental_80_Shoes_Pink_B41679_01_standard.jpg",
+		"tags": ["men", "originals"], 
+		"kind": "Originals",
+		"specialTag": "Exclusive"
+	},
+	{
+		"id": 200,
+		"title": "Mélange Crossbody Bag",
+    "price": 33,
+    "salePrice": null,
 		"reviewStars": 5,
-		"reviewsTotal": 1,
-		"productPicture": "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/e6a6fbf9e8d5440c8229a9a800debac1_9366/Predator_Tango_19_3_Indoor_Shoes_Blue_BB9080_01_standard.jpg",
-		"tags": ["soccer"], 
-		"kind": "Performance"
+		"reviewsTotal": 2,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/other-products/200/Melange_Crossbody_Bag_Black_DV2403_01_standard.jpg",
+		"tags": ["men", "originals", "women"], 
+		"kind": "Originals",
+		"specialTag": null
+	},
+	{
+		"id": 201,
+		"title": "Tiro 17 Training Pants",
+    "price": 45,
+    "salePrice": 23,
+		"reviewStars": 4.3,
+		"reviewsTotal": 1093,
+		"productPicture": "https://s3-us-west-1.amazonaws.com/abibas-shoes/shoes/058/Continental_80_Shoes_Pink_B41679_01_standard.jpg",
+		"tags": ["women", "performance", "soccer"], 
+		"kind": "Performance",
+		"specialTag": "Sale"
 	}
 ]

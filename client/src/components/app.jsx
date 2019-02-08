@@ -1,19 +1,15 @@
 import React from 'react';
-import styles from './styles.css'
+import styles from '../styles/app.css';
+import Carousel from './carousel.jsx';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+const App = () => {
 
-        }
-    }
-
-    render() {
         return (
-            <div className={styles.app}>This is react hollah</div>
+            <div>
+                <div className={styles.heading}>You may also like</div>
+                <Carousel />
+            </div>
         )
-    }
 }
 
 export default App;
