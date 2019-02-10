@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/suggestions');
 
 var db = mongoose.connection;
-db.on('error', (err)=> console.log('connection error: ', err));
+db.on('error', (err) => console.log('connection error: ', err));
 db.once('open', () => console.log('mongo is connected'));
 
 const productSchema = new mongoose.Schema({

@@ -5,7 +5,7 @@ import Carousel from './carousel.jsx';
 const App = () => {
 
         return (
-            <div>
+            <div className={styles.container}>
                 <div className={styles.heading}>You may also like</div>
                 <Carousel />
             </div>

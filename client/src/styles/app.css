@@ -1,6 +1,15 @@
+@font-face {
+    font-family: 'abibas-bold';
+    src: url('./fonts/adineuePRO-Bold.woff2') format('woff2');
+  }
+
+.container {
+    margin: 50px;
+}
+
 .heading {
     font-size: 12px;
-    font-family: "AdineuePRO", Helvetica,Arial, sans-serif;
+    font-family: "abibas-bold", Helvetica,Arial, sans-serif;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-size: normal;
@@ -10,3 +19,6 @@
     font-size: 36px;
     line-height: 32px;
 }
+
+
+
