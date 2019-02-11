@@ -9,7 +9,7 @@ class Carousel extends React.Component {
 		this.state = {
 			data: [],
 			currID: Math.ceil(Math.random() * 5),
-			currentIndex: 0,
+			position: 0,
 			translateValue: 0
 			// currSlides: []
 		}
@@ -18,6 +18,7 @@ class Carousel extends React.Component {
 		this.currentSlide = this.currentSlide.bind(this);
 		this.showItems = this.showItems.bind(this);
 		this.shuffle = this.shuffle.bind(this);
+		this.getOrder = this.getOrder.bind(this);
 	}
 
 	componentDidMount() {
@@ -49,14 +50,24 @@ class Carousel extends React.Component {
 		return arr;
 	}
 
-	goPrevSlides() {
-		if(this.state.currentIndex === 0) {
-			return;
+	getOrder(itemIndex) {
+		const { position } = this.state
+		const { data } = this.state
+		const numItems = data.length || 1
+		if (itemIndex - position < 0) {
+			return numItems - Math.abs(itemIndex - position)
 		}
-		this.setState(prevState => ({
-			currentIndex: prevState.currentIndex - 1,
-			translateValue: prevState.translateValue + this.slideWidth()
-		}))
+		return itemIndex - position
+	}
+
+	goPrevSlides() {
+		// if(this.state.currentIndex === 0) {
+		// 	return;
+		// }
+		// this.setState(prevState => ({
+		// 	currentIndex: prevState.currentIndex - 1,
+		// 	translateValue: prevState.translateValue + this.slideWidth()
+		// }))
 	}
 
 	goToNextSlide() {
@@ -69,10 +80,10 @@ class Carousel extends React.Component {
     // }
     
     // This will not run if we met the if condition above
-    this.setState(prevState => ({
-      currentIndex: prevState.currentIndex + 1,
-      translateValue: prevState.translateValue + -(this.slideWidth())
-    }));
+    // this.setState(prevState => ({
+    //   currentIndex: prevState.currentIndex + 1,
+    //   translateValue: prevState.translateValue + -(this.slideWidth())
+    // }));
   }
 
 	showItems(num) {
@@ -99,14 +110,16 @@ class Carousel extends React.Component {
 		let data = this.state.data.slice(0, 4);
 		if (data.length > 0) {
 			return (
-				<div >
+				<div>
+				<div className={styles.wrapper}>
 					<div className={styles.carousel} id='carousel'>
 						{data.map((obj, i) => {
-							return <Item key={i} obj={obj} />
+							return <Item key={i} obj={obj} order={this.getOrder(i)} />
 						})}
 						<a className={styles.prev} onClick={this.changeSlides(-1)}>&#10094;</a>
 						<a className={styles.next} onClick={this.changeSlides(1)}>&#10095;</a>
 					</div><br/>
+				</div>
 					<div className={styles.nav}>
 						<span className={`${styles.li} ${styles.active}`} onClick={this.currentSlide(1)}></span>
 						<span className={styles.li} onClick={this.currentSlide(2)}></span>

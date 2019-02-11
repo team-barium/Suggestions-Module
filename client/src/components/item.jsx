@@ -12,6 +12,7 @@ const Item = (props) => {
 		reviews = null;
 	}
 	return (
+		<div className={styles.wrapper} style={{order: (props) => props.order}}>
 		<div className={styles.item}>
 			<div id='picture'>
 				<img className={styles.picture} src={props.obj.productPicture}></img>
@@ -24,6 +25,7 @@ const Item = (props) => {
 				</div>
 				<div className={styles.ratings}>{reviews}</div>
 			</div>
+		</div>
 		</div>
 	)
 }
