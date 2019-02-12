@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styles from '../styles/carousel.css';
 import Item from './item.jsx'
+import { runInThisContext } from 'vm';
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -10,15 +11,18 @@ class Carousel extends React.Component {
 			data: [],
 			currID: Math.ceil(Math.random() * 5),
 			position: 0,
-			translateValue: 0
+			direction: 'next',
+			// translateValue: 0,
+			sliding: false
 			// currSlides: []
 		}
 		this.getSuggestions = this.getSuggestions.bind(this);
-		this.changeSlides = this.changeSlides.bind(this);
-		this.currentSlide = this.currentSlide.bind(this);
-		this.showItems = this.showItems.bind(this);
+		// this.showItems = this.showItems.bind(this);
 		this.shuffle = this.shuffle.bind(this);
 		this.getOrder = this.getOrder.bind(this);
+		this.nextSlide = this.nextSlide.bind(this);
+		this.prevSlide = this.prevSlide.bind(this);
+		this.slide = this.slide.bind(this);
 	}
 
 	componentDidMount() {
@@ -37,7 +41,7 @@ class Carousel extends React.Component {
 			.then(({ data }) => {
 				let shuffled = this.shuffle(data)
 				this.setState({ data: shuffled })
-				this.showItems(0)
+				// this.showItems(0)
 			})
 			.catch(err => console.log(err))
 	}
@@ -50,81 +54,86 @@ class Carousel extends React.Component {
 		return arr;
 	}
 
+	//to show four at a time have to increment order by four
 	getOrder(itemIndex) {
 		const { position } = this.state
 		const { data } = this.state
-		const numItems = data.length || 1
+		const numItems = data.length || 1;
 		if (itemIndex - position < 0) {
 			return numItems - Math.abs(itemIndex - position)
 		}
 		return itemIndex - position
 	}
 
-	goPrevSlides() {
-		// if(this.state.currentIndex === 0) {
-		// 	return;
-		// }
-		// this.setState(prevState => ({
-		// 	currentIndex: prevState.currentIndex - 1,
-		// 	translateValue: prevState.translateValue + this.slideWidth()
-		// }))
+
+	nextSlide() {
+		const { position } = this.state;
+		const { data } = this.state;
+		const numItems = data.length || 1;
+
+		this.slide('next', position === numItems - 1 ? 0 : position + 1)
 	}
 
-	goToNextSlide() {
+	prevSlide() {
+		const { position } = this.state;
+		const { data } = this.state;
+		const numItems = data.length;
 
-    // if(this.state.currentIndex === this.state.data.length - 1) {
-    //   return this.setState({
-    //     currentIndex: 0,
-    //     translateValue: 0
-    //   })
-    // }
-    
-    // This will not run if we met the if condition above
-    // this.setState(prevState => ({
-    //   currentIndex: prevState.currentIndex + 1,
-    //   translateValue: prevState.translateValue + -(this.slideWidth())
-    // }));
-  }
-
-	showItems(num) {
-		let { data } = this.state;
-		if (data.length > 0) {
-			let current = this.state.currSlides.concat(data[num]);
-			this.setState({ currSlides: current })
-		}
-		// this.setState({slideIndex: num})
+		this.slide('prev', position === 0 ? numItems - 1 : position - 1)
 	}
 
-	changeSlides(num) {
-		// let {slideIndex} = this.state;
-		// this.showItems(num)
-	}
+	slide(direction, position) {
 
-	currentSlide(num) {
-		// let {slideIndex} = this.state;
-		// this.setState({slideIndex: num})
-		// this.showItems(num)
+		this.setState({
+			sliding: true,
+			direction,
+			position
+		})
+
+		setTimeout(() => {
+			this.setState({
+				sliding: false
+			})
+		}, 50)
 	}
 
 	render() {
-		let data = this.state.data.slice(0, 4);
+		let data = this.state.data.slice(0, 12);
+		let {sliding} = this.state;
+		let {direction} = this.state;
+
+		const caroTransition = () => sliding ? 'none' : 'transform 1s ease';
+
+		const caroTransform = () => {
+			if (!sliding) return 'translateX(calc(-100% - 20px)'
+			if (direction === 'prev') return 'translateX(calc(2*(-100% - 20px)))'
+			return 'translateX(0%)'
+		}
+
+		const carouselStyling = {
+			display: 'flex',
+			margin: '0 0 20px 20px',
+			transition: `${caroTransition()}`,
+			transform: `${caroTransform()}`
+		}
+
 		if (data.length > 0) {
 			return (
 				<div>
-				<div className={styles.wrapper}>
-					<div className={styles.carousel} id='carousel'>
-						{data.map((obj, i) => {
-							return <Item key={i} obj={obj} order={this.getOrder(i)} />
-						})}
-						<a className={styles.prev} onClick={this.changeSlides(-1)}>&#10094;</a>
-						<a className={styles.next} onClick={this.changeSlides(1)}>&#10095;</a>
-					</div><br/>
-				</div>
+					<div className={styles.wrapper}>
+						<div className={styles.carousel} style={carouselStyling} id='carousel'>
+							{data.map((obj, i) => {
+								return <Item key={i} obj={obj} order={this.getOrder(i)} />
+							})}
+						</div><br />
+							<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>
+							<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>
+					</div>
 					<div className={styles.nav}>
-						<span className={`${styles.li} ${styles.active}`} onClick={this.currentSlide(1)}></span>
-						<span className={styles.li} onClick={this.currentSlide(2)}></span>
-						<span className={styles.li} onClick={this.currentSlide(3)}></span>
-						<span className={styles.li} onClick={this.currentSlide(4)}></span>
+						<span className={`${styles.li} ${styles.active}`} ></span>
+						<span className={styles.li} ></span>
+						<span className={styles.li} ></span>
+						<span className={styles.li} ></span>
 					</div>
 				</div>
 			)

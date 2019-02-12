@@ -3,12 +3,11 @@
     src: url('./fonts/AdihausDIN-Regular.woff2') format('woff2');
 }
 
-.wrapper {
+/* .wrapper {
     flex: 1 0 100%;
     flex-basis: 80%;
     margin-right: 20px; 
-    /* order: (props) => props.order; */
-}
+} */
 
 .item { 
     /* box-sizing: border-box; */

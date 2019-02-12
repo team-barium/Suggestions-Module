@@ -3,14 +3,14 @@
     overflow: hidden;
 }
 
-.carousel {
-    display: flex;
-    margin: 0 0 20px 20px;
+/* .carousel { */
+    /* display: flex;
+    margin: 0 0 20px 20px; */
     /* flex-direction: row;
     justify-content: center;
     align-items: flex-start; */
     /* flex-wrap: wrap; */
-}
+/* } */
 
 .nav {
     display: flex;
@@ -62,7 +62,7 @@
   }
 
   .next {
-    right: 0;
+    right: 12px;
   }
 
   .prev:hover, .next:hover {
