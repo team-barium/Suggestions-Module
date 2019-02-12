@@ -96,10 +96,10 @@ class Carousel extends React.Component {
 		const { position } = this.state;
 		if (index > position) {
 			this.slide('next', index);
-		} else {
+		} else if (index < position) {
 			this.slide('prev', index);
 		}
-		// this.setState({ position: index })
+
 	}
 
 	render() {
