@@ -12,16 +12,8 @@ const Item = (props) => {
 		reviews = null;
 	}
 
-	const wrapStyle = {
-		display: 'flex',
-		// flex: '1 0 100 %',
-		// flexBasis: '80 %',
-		marginRight: '20px',
-		order: `${props.order}`
-	}
-
 return (
-	<div className={styles.wrapper} style={wrapStyle}>
+	<div className={styles.wrapper} style={{order: props.order}}>
 		<div className={styles.item}>
 			<div id='picture'>
 				<img className={styles.picture} src={props.obj.productPicture}></img>

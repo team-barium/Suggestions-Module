@@ -8,6 +8,7 @@
 }
 
 .heading {
+    box-sizing: border-box;
     font-size: 12px;
     font-family: "abibas-bold", Helvetica,Arial, sans-serif;
     text-transform: uppercase;
@@ -18,6 +19,10 @@
     margin-bottom: 20px;
     font-size: 36px;
     line-height: 32px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
 
