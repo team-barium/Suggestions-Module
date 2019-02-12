@@ -1,20 +1,22 @@
 .wrapper {
     width: 100%;
     overflow: hidden;
+    max-width: 1366px;
+    /* position: relative; */
 }
 
 .prev, .next {
+    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
     position: absolute;
     top: 35%;
     /* left: 7%; */
     /* width: auto; */
     margin-top: -22px;
-    padding: 5px;
+    text-align: center;
     color: #474848;
     background-color: #f9fafa;
-    /* font-weight: bold; */
-    font-size: 18px;
+    font-size: 20px;
     user-select: none;
     display: inline-block;
     vertical-align: text-top;
@@ -23,7 +25,7 @@
   }
 
   .next {
-    right: 12px;
+    right: 58px;
   }
 
   .prev:hover, .next:hover {

@@ -68,7 +68,7 @@ class Carousel extends React.Component {
 		const { data } = this.state;
 		const numItems = data.length || 1;
 
-		this.slide('next', position === numItems - 1 ? 0 : position + 1)
+		this.slide('next', position + 4)
 	}
 
 	prevSlide() {
@@ -76,7 +76,7 @@ class Carousel extends React.Component {
 		const { data } = this.state;
 		const numItems = data.length;
 
-		this.slide('prev', position === 0 ? numItems - 1 : position - 1)
+		this.slide('prev', position - 4)
 	}
 
 	slide(direction, position) {
@@ -94,10 +94,11 @@ class Carousel extends React.Component {
 
 	changePosition(index) {
 		const { position } = this.state;
-		if (index > position) {
-			this.slide('next', index);
-		} else if (index < position) {
-			this.slide('prev', index);
+		const pageIndex = index*4;
+		if (pageIndex > position) {
+			this.slide('next', pageIndex);
+		} else if (pageIndex < position) {
+			this.slide('prev', pageIndex);
 		}
 
 	}
@@ -106,6 +107,7 @@ class Carousel extends React.Component {
 		let data = this.state.data.slice(0, 12);
 		let { sliding } = this.state;
 		let { direction } = this.state;
+		let { position } = this.state;
 
 		const caroTransition = () => sliding ? 'none' : 'transform 0.3s ease';
 
@@ -118,8 +120,20 @@ class Carousel extends React.Component {
 		const carouselStyling = {
 			display: 'flex',
 			margin: '0 0 20px 20px',
-			transition: `${caroTransition()}`,
-			transform: `${caroTransform()}`
+			// transition: `${caroTransition()}`,
+			// transform: `${caroTransform()}`
+		}
+
+		const prevArrow = () => {
+			if (position !== 0) {
+				return (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>)
+			}
+		}
+
+		const nextArrow = () => {
+			if (position < 12) {
+				return (<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>)
+			}
 		}
 
 		if (data.length > 0) {
@@ -131,14 +145,14 @@ class Carousel extends React.Component {
 								return <Item key={i} obj={obj} order={this.getOrder(i)} />
 							})}
 						</div><br />
-						<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>
-						<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>
+						{prevArrow()}
+						{nextArrow()}
 						<Indicator position={this.state.position} changePosition={this.changePosition} />
 					</div>
 				</div>
 			)
 		} else {
-			return <div>No data</div>
+			return <div></div>
 		}
 	}
 }

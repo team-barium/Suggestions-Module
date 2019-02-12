@@ -7,7 +7,7 @@ const Indicator = (props) => {
     return (
         <div className={styles.nav}>
             {Array.from({length: 4}, (pip, i) =>
-                <Pip key={i} isCurrent={i===position} index={i} changePosition={props.changePosition} />
+                <Pip key={i} isCurrent={(i*4)===position} index={i} changePosition={props.changePosition} />
             )}
         </div>
     )
