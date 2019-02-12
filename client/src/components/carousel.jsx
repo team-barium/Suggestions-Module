@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import styles from '../styles/carousel.css';
-import Item from './item.jsx'
-import { runInThisContext } from 'vm';
+import Item from './item.jsx';
+import Indicator from './indicator.jsx'
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -12,17 +12,15 @@ class Carousel extends React.Component {
 			currID: Math.ceil(Math.random() * 5),
 			position: 0,
 			direction: 'next',
-			// translateValue: 0,
 			sliding: false
-			// currSlides: []
 		}
 		this.getSuggestions = this.getSuggestions.bind(this);
-		// this.showItems = this.showItems.bind(this);
 		this.shuffle = this.shuffle.bind(this);
 		this.getOrder = this.getOrder.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 		this.prevSlide = this.prevSlide.bind(this);
 		this.slide = this.slide.bind(this);
+		this.changePosition = this.changePosition.bind(this);
 	}
 
 	componentDidMount() {
@@ -41,7 +39,6 @@ class Carousel extends React.Component {
 			.then(({ data }) => {
 				let shuffled = this.shuffle(data)
 				this.setState({ data: shuffled })
-				// this.showItems(0)
 			})
 			.catch(err => console.log(err))
 	}
@@ -83,13 +80,11 @@ class Carousel extends React.Component {
 	}
 
 	slide(direction, position) {
-
 		this.setState({
 			sliding: true,
 			direction,
 			position
 		})
-
 		setTimeout(() => {
 			this.setState({
 				sliding: false
@@ -97,12 +92,22 @@ class Carousel extends React.Component {
 		}, 50)
 	}
 
+	changePosition(index) {
+		const { position } = this.state;
+		if (index > position) {
+			this.slide('next', index);
+		} else {
+			this.slide('prev', index);
+		}
+		// this.setState({ position: index })
+	}
+
 	render() {
 		let data = this.state.data.slice(0, 12);
-		let {sliding} = this.state;
-		let {direction} = this.state;
+		let { sliding } = this.state;
+		let { direction } = this.state;
 
-		const caroTransition = () => sliding ? 'none' : 'transform 1s ease';
+		const caroTransition = () => sliding ? 'none' : 'transform 0.3s ease';
 
 		const caroTransform = () => {
 			if (!sliding) return 'translateX(calc(-100% - 20px)'
@@ -121,19 +126,14 @@ class Carousel extends React.Component {
 			return (
 				<div>
 					<div className={styles.wrapper}>
-						<div className={styles.carousel} style={carouselStyling} id='carousel'>
+						<div className={styles.carousel} style={carouselStyling} >
 							{data.map((obj, i) => {
 								return <Item key={i} obj={obj} order={this.getOrder(i)} />
 							})}
 						</div><br />
-							<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>
-							<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>
-					</div>
-					<div className={styles.nav}>
-						<span className={`${styles.li} ${styles.active}`} ></span>
-						<span className={styles.li} ></span>
-						<span className={styles.li} ></span>
-						<span className={styles.li} ></span>
+						<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>
+						<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>
+						<Indicator position={this.state.position} changePosition={this.changePosition} />
 					</div>
 				</div>
 			)
