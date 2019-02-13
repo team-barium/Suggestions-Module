@@ -51,11 +51,11 @@ class Carousel extends React.Component {
 		return arr;
 	}
 
-	//to show four at a time have to increment order by four
 	getOrder(itemIndex) {
 		const { position } = this.state
 		const { data } = this.state
 		const numItems = data.length || 1;
+
 		if (itemIndex - position < 0) {
 			return numItems - Math.abs(itemIndex - position)
 		}
@@ -66,7 +66,6 @@ class Carousel extends React.Component {
 	nextSlide() {
 		const { position } = this.state;
 		const { data } = this.state;
-		const numItems = data.length || 1;
 
 		this.slide('next', position + 4)
 	}
@@ -74,7 +73,6 @@ class Carousel extends React.Component {
 	prevSlide() {
 		const { position } = this.state;
 		const { data } = this.state;
-		const numItems = data.length;
 
 		this.slide('prev', position - 4)
 	}
@@ -100,7 +98,6 @@ class Carousel extends React.Component {
 		} else if (pageIndex < position) {
 			this.slide('prev', pageIndex);
 		}
-
 	}
 
 	render() {
@@ -109,32 +106,23 @@ class Carousel extends React.Component {
 		let { direction } = this.state;
 		let { position } = this.state;
 
-		const caroTransition = () => sliding ? 'none' : 'transform 0.3s ease';
-
 		const caroTransform = () => {
-			if (!sliding) return 'translateX(calc(-100% - 20px)'
-			if (direction === 'prev') return 'translateX(calc(2*(-100% - 20px)))'
+			if (sliding && direction === 'next') return 'translateX(calc(100% - 0px)'
+			if (sliding && direction === 'prev') return 'translateX(calc(2*(-100% - 0px)))'
 			return 'translateX(0%)'
 		}
 
 		const carouselStyling = {
 			display: 'flex',
-			margin: '0 0 20px 20px',
-			// transition: `${caroTransition()}`,
-			// transform: `${caroTransform()}`
+			maxWidth: '849px',
+			// margin: '0 0 20px 20px',
+			transition: `${sliding ? 'none' : 'transform 0.3s ease'}`,
+			transform: `${caroTransform()}`
 		}
 
-		const prevArrow = () => {
-			if (position !== 0) {
-				return (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>)
-			}
-		}
+		const prevArrow = () => position !==  0 ? (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>) : null;
 
-		const nextArrow = () => {
-			if (position < 12) {
-				return (<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>)
-			}
-		}
+		const nextArrow = () => position < 12 ? (<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>) : null;
 
 		if (data.length > 0) {
 			return (
