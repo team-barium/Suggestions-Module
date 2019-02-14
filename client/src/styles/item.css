@@ -101,13 +101,22 @@
 
 .heartWrapper {
 	position: absolute;
-	top: 5%;
-	margin-left: 165px;
+	top: 6%;
+	margin-left: 163px;
   	z-index: 2;
   	display: inline-block;
 }
 
 .heart {
-  	width: 24px;
-  	height: 22px; 
+  	width: 22px;
+  	height: auto; 
+}
+
+.tag {
+	width: 20px;
+	height: auto;
+	position: absolute;
+	top: 4%;
+	margin-left: 9px;
+	display: inline-block;
 }

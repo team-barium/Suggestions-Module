@@ -22,8 +22,12 @@
     height: 24px;
   }
 
+  .prev {
+      left: 64px;
+  }
+
   .next {
-    right: 58px;
+    left: 874px;
   }
 
   .prev:hover, .next:hover {
