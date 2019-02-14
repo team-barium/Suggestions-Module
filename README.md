@@ -16,9 +16,7 @@ Front End Capstone: abibas
 
 ## Usage
 
-npm install
-npm start
-npm run build
+You can navigate to http://localhost:8080/:id, where id is an integer between 0 and 100 (inclusive). This will show the specific recommendations associated with that listing id.
 
 ## Requirements
 
