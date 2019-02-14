@@ -92,7 +92,7 @@ class Carousel extends React.Component {
 
 	changePosition(index) {
 		const { position } = this.state;
-		const pageIndex = index*4;
+		const pageIndex = index * 4;
 		if (pageIndex > position) {
 			this.slide('next', pageIndex);
 		} else if (pageIndex < position) {
@@ -107,9 +107,9 @@ class Carousel extends React.Component {
 		let { position } = this.state;
 
 		const caroTransform = () => {
-			if (sliding && direction === 'next') return 'translateX(calc(100% - 0px)'
-			if (sliding && direction === 'prev') return 'translateX(calc(2*(-100% - 0px)))'
-			return 'translateX(0%)'
+			if (!sliding) return 'translateX(calc(0% - 849px))'
+    	if (direction === 'prev') return 'translateX(calc(2 * (-0% - 849px)))'
+    	return 'translateX(0%)'
 		}
 
 		const carouselStyling = {
@@ -120,7 +120,7 @@ class Carousel extends React.Component {
 			transform: `${caroTransform()}`
 		}
 
-		const prevArrow = () => position !==  0 ? (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>) : null;
+		const prevArrow = () => position !== 0 ? (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>) : null;
 
 		const nextArrow = () => position < 12 ? (<a className={styles.next} onClick={this.nextSlide}>&#10095;</a>) : null;
 
