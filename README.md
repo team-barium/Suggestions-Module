@@ -16,7 +16,7 @@ Front End Capstone: abibas
 
 ## Usage
 
-You can navigate to http://localhost:8080/:id, where id is an integer between 0 and 100 (inclusive). This will show the specific recommendations associated with that listing id.
+You can navigate to http://localhost:8080/abibas/id, where id is an integer between 0 and 100 or 200 and 210 (inclusive). This will show the specific recommendations associated with that listing id.
 
 ## Requirements
 
@@ -31,25 +31,16 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 From within the root directory:
 
+1. Install dependencies
 ```sh
-  npm install
-  npm install @babel/core
-  npm install @babel/preset-env
-  npm install @babel/preset-es2015
-  npm install @babel/preset-react
-  npm install axios
-  npm install babel-loader
-  npm install body-parser
-  npm install css-loader
-  npm install express
-  npm install mongoose
-  npm install morgan
-  npm install nodemon
-  npm install react
-  npm install react-dom
-  npm install style-loader
-  npm install url-loader
-  npm install webpack
-  npm install webpack-cli
+npm install
+  ```
+2. Build project
+```sh
+npm run build
+  ```
+3. Start server 
+```sh
+npm start
   ```
 
