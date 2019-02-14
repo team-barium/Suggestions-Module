@@ -8,9 +8,16 @@ class Item extends React.Component {
 		this.state = {
 			filledHeart: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/heart-grey-filled.png',
 			outlinedHeart: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/heart-grey-outline.png',
-			currHeart: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/heart-grey-outline.png'
+			currHeart: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/heart-grey-outline.png',
+			saleTag: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/sale-tag.png',
+			exclusiveTag: 'https://s3-us-west-1.amazonaws.com/abibas-shoes/icons/exclusive-tag.png',
+			specialTag: ''
 		}
 		this.fillHeart = this.fillHeart.bind(this);
+		this.specialTag = this.specialTag.bind(this);
+	}
+	componentDidMount() {
+		this.specialTag()
 	}
 
 	fillHeart() {
@@ -20,6 +27,15 @@ class Item extends React.Component {
 			this.setState({currHeart: this.state.filledHeart})
 		} else {
 			this.setState({currHeart: this.state.outlinedHeart})
+		}
+	}
+
+	specialTag() {
+		let {specialTag} = this.props.obj
+		if (specialTag === 'Sale') {
+			this.setState({specialTag: <img className={styles.tag} src={this.state.saleTag}/>})
+		} else if (specialTag === 'Exclusive') {
+			this.setState({specialTag: <img className={styles.tag} src={this.state.exclusiveTag}/>})
 		}
 	}
 
@@ -39,6 +55,7 @@ class Item extends React.Component {
 				<div className={styles.item}>
 					<div id='picture' >
 						<img className={styles.picture} src={this.props.obj.productPicture}></img>
+						{this.state.specialTag}
 						<div className={styles.heartWrapper}>
 							<img className={styles.heart} onClick={this.fillHeart} src={this.state.currHeart}></img>
 						</div>
