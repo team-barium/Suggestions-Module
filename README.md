@@ -49,7 +49,6 @@ From within the root directory:
   npm install nodemon
   npm install react
   npm install react-dom
-  npm install react-star-ratings
   npm install style-loader
   npm install url-loader
   npm install webpack

@@ -1,5 +1,4 @@
 import React from 'react';
-import StarRatings from 'react-star-ratings'
 import styles from '../styles/item.css';
 
 class Item extends React.Component {
@@ -45,7 +44,8 @@ class Item extends React.Component {
 			price = <div><span className={styles.red}>${this.props.obj.salePrice}</span> <span className={styles.strikethrough}> ${this.props.obj.price}</span></div>
 		}
 
-		let reviews = <div><StarRatings numberOfStars={5} starDimension="12px" rating={this.props.obj.reviewStars} starRatedColor='#767677' starEmptyColor="#eceeef" starSpacing="1px" /><span className={styles.ratingPad}>{this.props.obj.reviewsTotal}</span></div>;
+		let width = `${(this.props.obj.reviewStars / 5) * 100}%`
+		let reviews = <div><div className={styles.starOuter}>&#x02606;&#x02606;&#x02606;&#x02606;&#x02606;<div className={styles.starInner} style={{width: width}}>&#x02605;&#x02605;&#x02605;&#x02605;&#x02605;</div></div><span className={styles.ratingPad}>{this.props.obj.reviewsTotal}</span></div>
 		if (!this.props.obj.reviewStars) {
 			reviews = null;
 		}
