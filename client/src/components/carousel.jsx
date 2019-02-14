@@ -9,7 +9,7 @@ class Carousel extends React.Component {
 		super(props);
 		this.state = {
 			data: [],
-			currID: Math.ceil(Math.random() * 5),
+			currId: null,
 			position: 0,
 			direction: 'next',
 			sliding: false
@@ -24,23 +24,28 @@ class Carousel extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getSuggestions()
+		const {id} = this.props;
+
+		this.setState(
+			{ currId: parseInt(id) },
+			() => this.getSuggestions()
+		);
 	}
 
 	getSuggestions() {
-		console.log(this.state.currID, 'get id')
-		let { currID } = this.state;
+		console.log(this.state.currId, 'get id')
+		let { currId } = this.state;
 		axios
-			.get('./suggestions', {
+			.get('http://localhost:8080/suggestions', {
 				params: {
-					id: currID
+					id: currId
 				}
 			})
 			.then(({ data }) => {
 				let shuffled = this.shuffle(data)
 				this.setState({ data: shuffled })
 			})
-			.catch(err => console.log(err))
+			.catch(err => console.log('axios get error', err))
 	}
 
 	shuffle(arr) {
