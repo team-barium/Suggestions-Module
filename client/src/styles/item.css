@@ -73,19 +73,6 @@
     font-weight: 400;
 }
 
-.ratings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #767677;
-}
-
-.star {
-    height: 11px;
-    width: 11px;
-}
-
 .red {
     color: red;
     margin-right: 5px;
@@ -96,7 +83,9 @@
 }
 
 .ratingPad {
-    padding-left: 3px;
+	padding-left: 3px;
+	font-size: 12px;
+	color:  #767677;
 }
 
 .heartWrapper {
@@ -119,4 +108,22 @@
 	top: 4%;
 	margin-left: 9px;
 	display: inline-block;
+}
+
+.starOuter {
+	display: inline-block;
+	position: relative;	
+	color: #767677;
+	font-size: 10px;
+}
+
+.starInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  /* width: 0; */
+  color: #767677;
+  font-size: 10px;
 }
