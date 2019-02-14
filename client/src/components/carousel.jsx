@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styles from '../styles/carousel.css';
 import Item from './item.jsx';
-import Indicator from './indicator.jsx'
+import Indicator from './indicator.jsx';
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class Carousel extends React.Component {
 			position: 0,
 			direction: 'next',
 			sliding: false
-		}
+		};
 		this.getSuggestions = this.getSuggestions.bind(this);
 		this.shuffle = this.shuffle.bind(this);
 		this.getOrder = this.getOrder.bind(this);
@@ -24,7 +24,7 @@ class Carousel extends React.Component {
 	}
 
 	componentDidMount() {
-		const {id} = this.props;
+		const { id } = this.props;
 
 		this.setState(
 			{ currId: parseInt(id) },
@@ -33,7 +33,6 @@ class Carousel extends React.Component {
 	}
 
 	getSuggestions() {
-		console.log(this.state.currId, 'get id')
 		let { currId } = this.state;
 		axios
 			.get('http://localhost:8080/suggestions', {
@@ -42,10 +41,10 @@ class Carousel extends React.Component {
 				}
 			})
 			.then(({ data }) => {
-				let shuffled = this.shuffle(data)
-				this.setState({ data: shuffled })
+				let shuffled = this.shuffle(data);
+				this.setState({ data: shuffled });
 			})
-			.catch(err => console.log('axios get error', err))
+			.catch(err => console.log('axios get error', err));
 	}
 
 	shuffle(arr) {
@@ -57,29 +56,25 @@ class Carousel extends React.Component {
 	}
 
 	getOrder(itemIndex) {
-		const { position } = this.state
-		const { data } = this.state
+		const { position } = this.state;
+		const { data } = this.state;
 		const numItems = data.length || 1;
 
 		if (itemIndex - position < 0) {
-			return numItems - Math.abs(itemIndex - position)
+			return numItems - Math.abs(itemIndex - position);
 		}
-		return itemIndex - position
+		return itemIndex - position;
 	}
 
 
 	nextSlide() {
 		const { position } = this.state;
-		const { data } = this.state;
-
-		this.slide('next', position + 4)
+		this.slide('next', position + 4);
 	}
 
 	prevSlide() {
 		const { position } = this.state;
-		const { data } = this.state;
-
-		this.slide('prev', position - 4)
+		this.slide('prev', position - 4);
 	}
 
 	slide(direction, position) {
@@ -87,12 +82,12 @@ class Carousel extends React.Component {
 			sliding: true,
 			direction,
 			position
-		})
+		});
 		setTimeout(() => {
 			this.setState({
 				sliding: false
-			})
-		}, 50)
+			});
+		}, 50);
 	}
 
 	changePosition(index) {
@@ -112,10 +107,10 @@ class Carousel extends React.Component {
 		let { position } = this.state;
 
 		const caroTransform = () => {
-			if (!sliding) return 'translateX(calc(0% - 849px))'
-    	if (direction === 'prev') return 'translateX(calc(2 * (-0% - 849px)))'
-    	return 'translateX(0%)'
-		}
+			if (!sliding) return 'translateX(calc(0% - 849px))';
+			if (direction === 'prev') return 'translateX(calc(2 * (-0% - 849px)))';
+			return 'translateX(0%)';
+		};
 
 		const carouselStyling = {
 			display: 'flex',
@@ -123,7 +118,7 @@ class Carousel extends React.Component {
 			// margin: '0 0 20px 20px',
 			transition: `${sliding ? 'none' : 'transform 0.3s ease'}`,
 			transform: `${caroTransform()}`
-		}
+		};
 
 		const prevArrow = () => position !== 0 ? (<a className={styles.prev} onClick={this.prevSlide}>&#10094;</a>) : null;
 
@@ -135,7 +130,7 @@ class Carousel extends React.Component {
 					<div className={styles.wrapper}>
 						<div className={styles.carousel} style={carouselStyling} >
 							{data.map((obj, i) => {
-								return <Item key={i} obj={obj} order={this.getOrder(i)} />
+								return <Item key={i} obj={obj} order={this.getOrder(i)} />;
 							})}
 						</div><br />
 						{prevArrow()}
@@ -143,9 +138,9 @@ class Carousel extends React.Component {
 						<Indicator position={this.state.position} changePosition={this.changePosition} />
 					</div>
 				</div>
-			)
+			);
 		} else {
-			return <div></div>
+			return <div></div>;
 		}
 	}
 }
