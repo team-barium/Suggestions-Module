@@ -16,7 +16,7 @@ Front End Capstone: abibas
 
 ## Usage
 
-You can navigate to http://localhost:8080/abibas/id, where id is an integer between 0 and 100 or 200 and 210 (inclusive). This will show the specific recommendations associated with that listing id.
+You can navigate to http://localhost:8080/abibas/id, where id is an integer between 0 and 65 (inclusive). This will show the specific recommendations associated with that listing id.
 
 ## Requirements
 
