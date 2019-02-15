@@ -1,10 +1,16 @@
+.gutter {
+  padding: 0 15px;
+  margin-left: 4.16667%;
+  width: 91.66667%;
+}
+
 .wrapper {
     width: 100%;
     overflow: hidden;
     max-width: 1366px;
+    min-width: 960px;
     margin-left: auto;
     margin-right: auto;
-    /* width: 849px; */
     position: relative;
 }
 

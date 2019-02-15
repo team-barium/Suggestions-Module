@@ -113,24 +113,23 @@ class Carousel extends React.Component {
 		let { position } = this.state;
 
 		const caroTransform = () => {
-			if (!sliding) return 'translateX(calc(0% - 849px))'
-			if (direction === 'prev') return 'translateX(calc(2 * (-0% - 849px)))'
+			if (!sliding) return 'translateX(calc(0% - 100%))'
+			if (direction === 'prev') return 'translateX(calc(2 * (-0% - 100%)))'
 			return 'translateX(0%)'
 		}
 
 		const carouselStyling = {
 			display: 'flex',
-			// maxWidth: '849px',
 			width: '100%',
 			position: 'relative',
-			// margin: '0 0 20px 20px',
+			maxWidth: '1366px',
 			transition: `${sliding ? 'none' : 'transform 0.3s ease'}`,
-			// transform: `${caroTransform()}`
+			transform: `${caroTransform()}`
 		}
 
 		if (data.length > 0) {
 			return (
-				<div>
+				<div className={styles.gutter}>
 					<div className={styles.wrapper}>
 						<div className={styles.carousel} style={carouselStyling} >
 							{data.map((obj, i) => {
