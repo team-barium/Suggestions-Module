@@ -5,37 +5,74 @@
 
 .wrapper {
     display: flex;
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
     /* flex-basis: 80%; */
     margin-right: 2px; 
-    
+    width: 25%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;   
 }
 
 .item { 
-    box-sizing: border-box;
-    margin: 5px;
     font-family: abibas-DIN, Helvetica, Arial, sans-serif;
-    overflow: auto;
-    width: 200px;
-    clear: both;
-    border: 1px solid white;
+    padding: 20px 5px;
+    /* margin: 5px; */  
 }
 
-.item:hover {
+.product {
+    overflow: auto;
+    width: 100%;
+    clear: both;
+    border: 1px solid transparent;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.product:hover {
     box-sizing: border-box;
     border: 1px solid black;
 }
 
 .picture {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    display: block;
+    /* height: 200px; */
     z-index: 1;
+}
+
+.heartWrapper {
+	position: absolute;
+    right: 16px;
+    top: 16px;
+  	z-index: 2;
+  	display: block;
+}
+
+.heart {
+  	width: 22px;
+    height: auto; 
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.tag {
+	width: 20px;
+	height: auto;
+	position: absolute;
+    top: 10px;
+    left: 10px;
+	display: inline-block;
 }
 
 .text {
     display: block;
     padding: 10px 10px 20px;
     box-sizing: border-box;
+    overflow: auto;
+    min-height: 75px;
 }
 
 .kind {
@@ -54,7 +91,7 @@
     font-size: 12px;
     line-height: normal;
     height: 60px;
-
+    display: block;
 }
 
 .title {
@@ -69,6 +106,7 @@
 
 .price {
     display: flex;
+    font-size: 12px;
     flex-wrap: wrap;
     font-weight: 400;
 }
@@ -80,41 +118,26 @@
 
 .strikethrough {
     text-decoration: line-through;
+    color: #767677;
+}
+
+.ratings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #767677;
+    font-size:  10px;
 }
 
 .ratingPad {
 	padding-left: 3px;
-	font-size: 12px;
-	color:  #767677;
-}
-
-.heartWrapper {
-	position: absolute;
-	top: 6%;
-	margin-left: 163px;
-  	z-index: 2;
-  	display: inline-block;
-}
-
-.heart {
-  	width: 22px;
-  	height: auto; 
-}
-
-.tag {
-	width: 20px;
-	height: auto;
-	position: absolute;
-	top: 4%;
-	margin-left: 9px;
-	display: inline-block;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .starOuter {
 	display: inline-block;
 	position: relative;	
-	color: #767677;
-	font-size: 10px;
 }
 
 .starInner {
@@ -123,6 +146,4 @@
   left: 0;
   white-space: nowrap;
   overflow: hidden;
-  color: #767677;
-  font-size: 10px;
 }
