@@ -20,20 +20,10 @@
   },
   "homepage": "https://github.com/team-barium/Suggestions-Module#readme",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-es2015": "^7.0.0-beta.53",
-    "@babel/preset-react": "^7.0.0",
     "axios": "^0.18.0",
-    "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
     "css-loader": "^2.1.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "eslint": "^5.14.1",
-    "eslint-plugin-react": "^7.12.4",
     "express": "^4.16.4",
-    "jest": "^24.1.0",
     "mongoose": "^5.4.10",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
@@ -41,20 +31,33 @@
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
+    "url-loader": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "enzyme-to-json": "^3.3.5",
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0",
+    "request": "^2.88.0",
     "webpack": "^4.29.1",
     "webpack-cli": "^3.2.3"
   },
   "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
     "setupFiles": [
-      "./test-setup.js"
+      "./specs/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/client/test/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/client/test/__mocks__/styleMock.js"
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
     }
   }
 }
