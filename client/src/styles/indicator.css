@@ -42,7 +42,7 @@
 }
 
 
-  .prev:hover, .next:hover {
+.prev:hover, .next:hover {
     background-color: rgba(0,0,0,1);
     color: white;
-  }
+}

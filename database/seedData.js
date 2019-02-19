@@ -14,9 +14,9 @@ const postData = objArr => {
 			tags: obj.tags, 
 			kind: obj.kind, 
 			specialTag: obj.specialTag
-		})
-	})
-}
+		});
+	});
+};
 
 postData(data);
 

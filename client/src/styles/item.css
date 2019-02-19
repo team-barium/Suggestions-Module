@@ -17,8 +17,7 @@
 
 .item { 
     font-family: abibas-DIN, Helvetica, Arial, sans-serif;
-    padding: 20px 5px;
-    /* margin: 5px; */  
+    padding: 20px 5px; 
 }
 
 .product {
@@ -39,7 +38,8 @@
 .picture {
     width: 100%;
     display: block;
-    /* height: 200px; */
+    max-width: 275px;
+    max-height: 275px;
     z-index: 1;
 }
 
@@ -141,9 +141,9 @@
 }
 
 .starInner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }

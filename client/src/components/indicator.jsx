@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles/indicator.css';
-import Pip from './pip.jsx'
+import Pip from './pip.jsx';
 
 const Indicator = (props) => {
 	const { position } = props;
@@ -19,7 +19,7 @@ const Indicator = (props) => {
 				)}
 			</ul>
 		</div>
-	)
-}
+	);
+};
 
 export default Indicator;

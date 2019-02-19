@@ -8,12 +8,12 @@ const port = process.env.PORT || 8080;
 
 app.use(morgan('dev'));
 app.use(parser.json());
-app.use(parser.urlencoded({extended: true}))
+app.use(parser.urlencoded({extended: true}));
 
 app.use('/abibas/:id', express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/suggestions', controllers.fetch);
 
 app.listen(port, () => {
-  console.log(`server running at: http://localhost:${port}`);
+	console.log(`server running at: http://localhost:${port}`);
 });
