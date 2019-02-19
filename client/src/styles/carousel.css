@@ -1,36 +1,16 @@
-.wrapper {
-    /* width: 100%; */
-    overflow: hidden;
-    width: 849px;
-    /* position: relative; */
+.gutter {
+  padding: 0 15px;
+  margin-left: 4.16667%;
+  width: 91.66667%;
 }
 
-.prev, .next {
-    font-family: Arial, Helvetica, sans-serif;
-    cursor: pointer;
-    position: absolute;
-    top: 37%;
-    margin-top: -22px;
-    text-align: center;
-    color: #474848;
-    background-color: #f9fafa;
-    font-size: 20px;
-    user-select: none;
-    display: inline-block;
-    vertical-align: text-top;
-    width: 24px;
-    height: 24px;
-  }
+.wrapper {
+    width: 100%;
+    overflow: hidden;
+    max-width: 1366px;
+    min-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
 
-  .prev {
-      left: 64px;
-  }
-
-  .next {
-    left: 874px;
-  }
-
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,1);
-    color: white;
-  }

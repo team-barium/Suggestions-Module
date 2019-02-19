@@ -3,13 +3,14 @@ import styles from '../styles/pip.css';
 
 const Pip = (props) => {
 
-    const pipStyle ={
-        border: `${props.isCurrent ? '2px solid black' : '0px solid black'}`,
-        borderBottom: `${props.isCurrent ? '2px solid black' : '1px solid black'}`
-    }
+    // const pipStyle = {
+    //     height: `${props.isCurrent ? '100%' : '25%'}`
+    // }
 
     return (
-        <span className={styles.li} style={pipStyle} onClick={(index) => props.changePosition(props.index)}></span>
+        <li className={styles.li} onClick={() => props.changePosition(props.index)}>
+            <span className={styles.dot} style={{height: `${props.isCurrent ? '100%' : '25%'}`}}></span>
+        </li>
     )
 }
 
