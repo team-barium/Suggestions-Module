@@ -7,10 +7,30 @@
 .wrapper {
     width: 100%;
     overflow: hidden;
-    max-width: 1366px;
-    min-width: 960px;
+    max-width: 1140px;
+    min-width: 800px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
 }
 
+.headingWrapper {
+    text-align: center;
+    float: left;
+}
+
+.heading {
+    box-sizing: border-box;
+    font-size: 12px;
+    font-family: "abibas-bold", Helvetica,Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: normal;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 36px;
+    line-height: 32px;
+    margin-left: auto;
+    margin-right: auto;
+}

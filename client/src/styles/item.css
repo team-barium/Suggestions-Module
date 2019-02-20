@@ -5,8 +5,6 @@
 
 .wrapper {
     display: flex;
-    /* flex: 1 1 auto; */
-    /* flex-basis: 80%; */
     margin-right: 2px; 
     width: 25%;
     flex-grow: 0;
@@ -33,6 +31,7 @@
 .product:hover {
     box-sizing: border-box;
     border: 1px solid black;
+    z-index: 10;
 }
 
 .picture {
