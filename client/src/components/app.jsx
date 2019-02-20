@@ -5,9 +5,6 @@ import Carousel from './carousel.jsx';
 const App = (props) => {
 	return (
 		<div className={styles.container}>
-			<div className={styles.headingWrapper}>
-				<div className={styles.heading}>You may also like</div>
-			</div>
 			<Carousel id={props.match.params.id}/>
 		</div>
 	);

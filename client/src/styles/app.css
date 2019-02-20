@@ -18,27 +18,7 @@
     }
 }
 
-.headingWrapper {
-    text-align: center;
-    margin-left: 4.166667%;
-    width: 91.66667%;
-    padding: 0 15px;
-    float: left;
-}
 
-.heading {
-    box-sizing: border-box;
-    font-size: 12px;
-    font-family: "abibas-bold", Helvetica,Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: normal;
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: 20px;
-    font-size: 36px;
-    line-height: 32px;
-}
 
 
 

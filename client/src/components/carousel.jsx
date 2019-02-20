@@ -126,7 +126,11 @@ class Carousel extends React.Component {
 		if (data.length > 0) {
 			return (
 				<div className={styles.gutter}>
+
 					<div className={styles.wrapper}>
+						<div className={styles.headingWrapper}>
+							<div className={styles.heading}>You may also like</div>
+						</div>
 						<div className={styles.carousel} style={carouselStyling} >
 							{data.map((obj, i) => {
 								return <Item key={i} obj={obj} order={this.getOrder(i)} />;
