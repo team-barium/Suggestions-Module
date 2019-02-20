@@ -3,7 +3,6 @@ import axios from 'axios';
 import styles from '../styles/carousel.css';
 import Item from './item.jsx';
 import Indicator from './indicator.jsx';
-import { relative } from 'path';
 
 class Carousel extends React.Component {
 	constructor(props) {
