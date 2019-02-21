@@ -2,15 +2,17 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const parser = require('body-parser');
+const cors = require('cors');
 const controllers = require('./controllers');
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3004;
 
 app.use(morgan('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 
-app.use('/abibas/:id', express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(cors());
 
 app.get('/suggestions', controllers.fetch);
 
