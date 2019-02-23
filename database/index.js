@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1/suggestions');
+mongoose.connect('mongodb://127.0.0.1/suggestions', { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
 var db = mongoose.connection;
 db.on('error', (err) => console.log('connection error: ', err));
