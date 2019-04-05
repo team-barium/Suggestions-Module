@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from '../styles/carousel.css';
 import Item from './item.jsx';
 import Indicator from './indicator.jsx';
+import { Swipeable } from 'react-swipeable';
+import { throttle } from 'lodash';
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -10,11 +12,14 @@ class Carousel extends React.Component {
 		this.state = {
 			data: [],
 			// currId: null,
-			// currId: Math.ceil(Math.random() * 19),
+			currId: Math.ceil(Math.random() * 19),
 			position: 0,
 			direction: 'next',
-			sliding: false
+			sliding: false,
+			width: 0,
+			showing: 4
 		};
+		this.updateWindowWidth = this.updateWindowWidth.bind(this);
 		this.getSuggestions = this.getSuggestions.bind(this);
 		this.shuffle = this.shuffle.bind(this);
 		this.getOrder = this.getOrder.bind(this);
@@ -22,16 +27,41 @@ class Carousel extends React.Component {
 		this.prevSlide = this.prevSlide.bind(this);
 		this.slide = this.slide.bind(this);
 		this.changePosition = this.changePosition.bind(this);
+		// this.handleSwipe = this.handleSwipe.bind(this);
 	}
 
 	componentDidMount() {
+		this.updateWindowWidth();
 		this.getSuggestions();
+		window.addEventListener('resize', this.updateWindowWidth);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateWindowWidth);
+	}
+
+	updateWindowWidth() {
+		let { position } = this.state;
+		this.setState({ width: window.innerWidth }, () => {
+			if (this.state.width <= 960) {
+				this.setState({ showing: 2 })
+			} else {
+				if (position % 4 !== 0) {
+					this.setState({ position: this.state.position - 2 })
+				}
+				this.setState({ showing: 4 })
+			}
+		});
 	}
 
 	getSuggestions() {
-		// let { currId } = this.state;
+		let { currId } = this.state;
 		axios
-			.get('/suggestions')
+			.get('/suggestions', {
+				params: {
+					id: currId
+				}
+			})
 			.then(({ data }) => {
 				let shuffled = this.shuffle(data);
 				this.setState({ data: shuffled });
@@ -60,15 +90,13 @@ class Carousel extends React.Component {
 
 
 	nextSlide() {
-		const { position } = this.state;
-
-		this.slide('next', position + 4);
+		const { position, showing } = this.state;
+		this.slide('next', position + showing);
 	}
 
 	prevSlide() {
-		const { position } = this.state;
-
-		this.slide('prev', position - 4);
+		const { position, showing } = this.state;
+		this.slide('prev', position - showing);
 	}
 
 	slide(direction, position) {
@@ -85,8 +113,8 @@ class Carousel extends React.Component {
 	}
 
 	changePosition(index) {
-		const { position } = this.state;
-		const pageIndex = index * 4;
+		const { position, showing } = this.state;
+		const pageIndex = index * showing;
 		if (pageIndex > position) {
 			this.slide('next', pageIndex);
 		} else if (pageIndex < position) {
@@ -94,22 +122,32 @@ class Carousel extends React.Component {
 		}
 	}
 
-	render() {
-		let data = this.state.data.slice(0, 12);
-		let { sliding } = this.state;
-		let { direction } = this.state;
+	// handleSwipe(isNext) {
+	// 	console.log('handling swipe')
+	// 	if (isNext) {
+	// 		this.nextSlide();
+	// 	} else {
+	// 		this.prevSlide();
+	// 	}
+	// }
 
-		const caroTransform = () => {
-			if (!sliding) return 'translateX(calc(0% - 100%))';
-			if (direction === 'prev') return 'translateX(calc(2 * (-0% - 100%)))';
-			return 'translateX(0%)';
+	render() {
+		let data = this.state.data.slice(0, 16);
+		let { sliding, direction, showing, position, width } = this.state;
+
+		let caroTransform = () => {
+			if (width <= 960) {
+				if (!sliding) return 'translateX(calc(0% - 88%))';
+				if (direction === 'prev') return 'translateX(calc(2*(-0% - 88%)))';
+				return 'translateX(0%)'
+			} else {
+				if (!sliding) return 'translateX(calc(0% - 100%))';
+				if (direction === 'prev') return 'translateX(calc(2 * (-0% - 100%)))';
+				return 'translateX(0%)';
+			}
 		};
 
-		const carouselStyling = {
-			display: 'flex',
-			width: '100%',
-			position: 'relative',
-			maxWidth: '1366px',
+		let carouselStyling = {
 			transition: `${sliding ? 'none' : 'transform 0.3s ease'}`,
 			transform: `${caroTransform()}`
 		};
@@ -117,17 +155,23 @@ class Carousel extends React.Component {
 		if (data.length > 0) {
 			return (
 				<div className={styles.gutter}>
-
 					<div className={styles.wrapper}>
 						<div className={styles.headingWrapper}>
 							<div className={styles.heading}>You may also like</div>
 						</div>
-						<div className={styles.carousel} style={carouselStyling} >
-							{data.map((obj, i) => {
-								return <Item key={i} obj={obj} order={this.getOrder(i)} />;
-							})}
-						</div><br />
-						<Indicator position={this.state.position} changePosition={this.changePosition} nextSlide={this.nextSlide} prevSlide={this.prevSlide} />
+						{/* <Swipeable
+							// onSwipingLeft={ () => throttle(this.handleSwipe(true), 500, { trailing: false }) }
+							// onSwipingRight={ () => throttle(this.handleSwipe(), 500, { trailing: false }) }
+							onSwipingLeft={() => this.handleSwipe(true)}
+							onSwipingRight={() => this.handleSwipe()}
+						> */}
+							<div className={styles.carousel} style={carouselStyling} >
+								{data.map((obj, i) => {
+									return <Item key={i} obj={obj} order={this.getOrder(i)} />;
+								})}
+							</div>
+						{/* </Swipeable> */}
+							<Indicator position={position} changePosition={this.changePosition} nextSlide={this.nextSlide} prevSlide={this.prevSlide} showing={showing} />
 					</div>
 				</div>
 			);
