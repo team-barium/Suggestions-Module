@@ -3,6 +3,7 @@ const Product = require('../database/index.js');
 module.exports = {
 	fetch: (req, res) => {
 		const {id} = req.query;
+		console.log('id', id)
 		if (id) {
 			return Product.find({id: id}, ['tags'], (err, product) => {
 				if (err) {

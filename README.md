@@ -43,4 +43,8 @@ npm run build
 ```sh
 npm start
   ```
+4. Seed database
+```sh
+npm run seed
+  ```
 

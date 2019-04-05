@@ -46,3 +46,9 @@
     background-color: rgba(0,0,0,1);
     color: white;
 }
+
+@media (max-width: 960px) {
+    .prev, .next {
+        display: none;
+    }
+}
