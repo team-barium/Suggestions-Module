@@ -50,7 +50,7 @@ class Item extends React.Component {
 		}
 
 		return (
-			<div className={styles.wrapper} style={{ order: this.props.order }}>
+			<div className={styles.wrapper}>
 				<div className={styles.item}>
 					<div className={styles.product}>
 						<div id='picture' >

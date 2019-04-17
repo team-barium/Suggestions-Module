@@ -5,6 +5,7 @@ import Item from './item.jsx';
 import Indicator from './indicator.jsx';
 import { Swipeable } from 'react-swipeable';
 import { throttle } from 'lodash';
+import { throws } from 'assert';
 
 class Carousel extends React.Component {
 	constructor(props) {
@@ -17,7 +18,8 @@ class Carousel extends React.Component {
 			direction: 'next',
 			sliding: false,
 			width: 0,
-			showing: 4
+			showing: 4,
+			initMousePos: 0
 		};
 		this.updateWindowWidth = this.updateWindowWidth.bind(this);
 		this.getSuggestions = this.getSuggestions.bind(this);
@@ -27,6 +29,8 @@ class Carousel extends React.Component {
 		this.prevSlide = this.prevSlide.bind(this);
 		this.slide = this.slide.bind(this);
 		this.changePosition = this.changePosition.bind(this);
+		this.transformCarousel = this.transformCarousel.bind(this);
+		this.onSlide = this.onSlide.bind(this);
 		// this.handleSwipe = this.handleSwipe.bind(this);
 	}
 
@@ -131,47 +135,68 @@ class Carousel extends React.Component {
 	// 	}
 	// }
 
+	transformCarousel(percent) {
+		let { sliding, direction } = this.state;
+		if (!sliding) return `translateX(calc(0% - ${percent}%))`;
+		if (direction === 'prev') return `translateX(calc(2*(-0% - ${percent}%)))`;
+		return 'translateX(0%)'
+	}
+
+	onSlide(e) {
+		// let rect = e.target.getBoundedClientRect();
+		let { initMousePos } = this.state;
+		let caroWidth = document.getElementById('carousel').offsetWidth;
+		let windowWidth = window.innerWidth;
+		let mouseX = e.clientX;
+
+		let mouseChange = mouseX - initMousePos;
+		// let sideDiff = windowWidth - caroWidth;
+		let percentToMove = (Math.abs(mouseChange) / caroWidth) * 100;
+		this.setState({ sliding: true, direction: 'next' }, () => {
+			this.transformCarousel(percentToMove)
+		})
+
+		// else if (mouseChange < 0) {
+		// 	percentToMove = - (Math.abs(mouseChange) / caroWidth) * 100;
+		// }
+
+		console.log(`${percentToMove}%`)
+	}
+
 	render() {
-		let data = this.state.data.slice(0, 16);
+		let data = this.state.data.slice(0, 15);
 		let { sliding, direction, showing, position, width } = this.state;
 
-		let caroTransform = () => {
-			if (width <= 960) {
-				if (!sliding) return 'translateX(calc(0% - 88%))';
-				if (direction === 'prev') return 'translateX(calc(2*(-0% - 88%)))';
-				return 'translateX(0%)'
-			} else {
-				if (!sliding) return 'translateX(calc(0% - 100%))';
-				if (direction === 'prev') return 'translateX(calc(2 * (-0% - 100%)))';
-				return 'translateX(0%)';
-			}
-		};
+		// let caroTransform = () => {
+		// 	if (width <= 960) {
+		// 		if (!sliding) return 'translateX(calc(0% - 88%))';
+		// 		if (direction === 'prev') return 'translateX(calc(2*(-0% - 88%)))';
+		// 		return 'translateX(0%)'
+		// 	} else {
+		// 		if (!sliding) return 'translateX(calc(0% - 100%))';
+		// 		if (direction === 'prev') return 'translateX(calc(2 * (-0% - 100%)))';
+		// 		return 'translateX(0%)';
+		// 	}
+		// };
 
 		let carouselStyling = {
-			transition: `${sliding ? 'none' : 'transform 0.3s ease'}`,
-			transform: `${caroTransform()}`
+			transition: `${sliding ? 'none' : 'transform 2.3s ease'}`,
+			transform: `${width <= 960 ? this.transformCarousel(88) : this.transformCarousel(100)}`
 		};
 
 		if (data.length > 0) {
 			return (
 				<div className={styles.gutter}>
-					<div className={styles.wrapper}>
+					<div className={styles.wrapper} >
 						<div className={styles.headingWrapper}>
 							<div className={styles.heading}>You may also like</div>
 						</div>
-						{/* <Swipeable
-							// onSwipingLeft={ () => throttle(this.handleSwipe(true), 500, { trailing: false }) }
-							// onSwipingRight={ () => throttle(this.handleSwipe(), 500, { trailing: false }) }
-							onSwipingLeft={() => this.handleSwipe(true)}
-							onSwipingRight={() => this.handleSwipe()}
-						> */}
-							<div className={styles.carousel} style={carouselStyling} >
-								{data.map((obj, i) => {
-									return <Item key={i} obj={obj} order={this.getOrder(i)} />;
-								})}
-							</div>
-						{/* </Swipeable> */}
-							<Indicator position={position} changePosition={this.changePosition} nextSlide={this.nextSlide} prevSlide={this.prevSlide} showing={showing} />
+						<div className={styles.carousel} id='carousel' style={carouselStyling} onDrag={(e) => this.onSlide(e)} onDragStart={(e) => this.setState({ initMousePos: e.clientX })} onDragEnd={(e) => this.setState({ sliding: false })}>
+							{data.map((obj, i) => {
+								return <Item key={i} obj={obj} order={this.getOrder(i)} />;
+							})}
+						</div>
+						<Indicator position={position} changePosition={this.changePosition} nextSlide={this.nextSlide} prevSlide={this.prevSlide} showing={showing} />
 					</div>
 				</div>
 			);
